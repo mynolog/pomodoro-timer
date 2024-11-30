@@ -1,11 +1,18 @@
+import { useEffect } from 'react'
 import Timer from './components/timer/Timer'
+import { requestNotificationPermission } from './utils/requestNotificationPermission'
+import { generateTimestamp } from './utils/generateTimestamp'
 
 function App() {
-  const time = new Date()
-  time.setSeconds(time.getSeconds() + 25 * 60)
+  useEffect(() => {
+    requestNotificationPermission()
+  }, [])
+
+  const timestamp = generateTimestamp(25 * 60)
+
   return (
     <>
-      <Timer expiryTimestamp={time} />
+      <Timer expiryTimestamp={timestamp} />
     </>
   )
 }
