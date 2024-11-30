@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'LABDegital';
+  src: url('assets/fonts/LABDegital.ttf') format('truetype');
+  font-style: normal;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

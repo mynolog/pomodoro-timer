@@ -1,5 +1,13 @@
+import Timer from './components/timer/Timer'
+
 function App() {
-  return <h1 className="text-3xl font-bold underline">Hello world!</h1>
+  const time = new Date()
+  time.setSeconds(time.getSeconds() + 25 * 60)
+  return (
+    <>
+      <Timer expiryTimestamp={time} />
+    </>
+  )
 }
 
 export default App
