@@ -6,15 +6,15 @@
     "isVisible": true
   },
   {
-    "id": "live-clock",
-    "label": "시계",
-    "path": "/live-clock",
-    "isVisible": true
-  },
-  {
     "id": "stop-watch",
     "label": "스톱워치",
     "path": "/stopwatch",
+    "isVisible": true
+  },
+  {
+    "id": "live-clock",
+    "label": "시계",
+    "path": "/live-clock",
     "isVisible": true
   }
 ]
