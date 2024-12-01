@@ -69,7 +69,7 @@ const Timer = ({
       <div
         className={`relative flex items-center gap-2 text-8xl font-degital rounded ${minutes === 0 && seconds <= 10 ? 'text-red-800' : 'text-gray-800'}`}
       >
-        <p className="absolute -left-12 text-5xl text-gray-800">
+        <p className="absolute -left-20 text-6xl text-teal-800">
           {isRunning ? <FaPersonRunning /> : <FaPerson />}
         </p>
         <div className="w-28 h-[176px] flex flex-col gap-1 items-center justify-center">
