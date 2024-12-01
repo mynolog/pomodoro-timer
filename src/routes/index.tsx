@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from '../components/layout/Layout'
 import Home from '../pages/home/Home'
 import LiveClock from '../pages/liveClock/LiveTime'
+import Stopwatch from '../pages/stopwatch/Stopwatch'
 
 const routes = [
   {
@@ -15,6 +16,10 @@ const routes = [
       {
         path: '/live-clock',
         element: <LiveClock />,
+      },
+      {
+        path: '/stopwatch',
+        element: <Stopwatch />,
       },
     ],
   },

@@ -13,8 +13,8 @@
   },
   {
     "id": "stop-watch",
-    "label": "스탑워치",
-    "path": "/stop-watch",
-    "isVisible": false
+    "label": "스톱워치",
+    "path": "/stopwatch",
+    "isVisible": true
   }
 ]
