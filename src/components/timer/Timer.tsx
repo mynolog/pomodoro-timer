@@ -6,15 +6,16 @@ import {
   VscDebugRestart,
   VscEdit,
 } from 'react-icons/vsc'
-import { formatTimeUnit } from '../../utils/formatter'
-import { generateTimestamp } from '../../utils/generateTimestamp'
+import { formatTimeUnit } from '../../utils/formatUtils'
+import { generateTimestamp } from '../../utils/generateUtils'
+import { getRandomMessage } from '../../utils/getUtils'
 import Button from '../common/Button/Button'
 
 function Timer({ expiryTimestamp }: { expiryTimestamp: Date }) {
   const { seconds, minutes, isRunning, pause, resume, restart } = useTimer({
     expiryTimestamp,
     onExpire: () => {
-      sendNotification('세션 종료', '10분간 휴식 시간입니다..!')
+      sendNotification('세션 종료', getRandomMessage())
     },
     autoStart: false,
   })

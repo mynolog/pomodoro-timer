@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import Timer from './components/timer/Timer'
-import { requestNotificationPermission } from './utils/requestNotificationPermission'
-import { generateTimestamp } from './utils/generateTimestamp'
+import { requestNotificationPermission } from './utils/requestUtils'
+import { generateTimestamp } from './utils/generateUtils'
 
 function App() {
   useEffect(() => {
