@@ -13,11 +13,13 @@ const Home = () => {
   }, [sessionMinute])
 
   return (
-    <Timer
-      expiryTimestamp={timestamp}
-      sessionMinute={sessionMinute}
-      setSessionMinute={setSessionMinute}
-    />
+    <div className="w-[600px]">
+      <Timer
+        expiryTimestamp={timestamp}
+        sessionMinute={sessionMinute}
+        setSessionMinute={setSessionMinute}
+      />
+    </div>
   )
 }
 

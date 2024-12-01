@@ -1,15 +1,22 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Layout from '../components/layout/Layout'
 import Home from '../pages/home/Home'
 import LiveClock from '../pages/liveClock/LiveTime'
 
 const routes = [
   {
     path: '/',
-    element: <Home />,
-  },
-  {
-    path: '/live-clock',
-    element: <LiveClock />,
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: '/live-clock',
+        element: <LiveClock />,
+      },
+    ],
   },
 ]
 
