@@ -15,11 +15,11 @@ type TimerProps = {
   setSessionMinute: Dispatch<SetStateAction<number>>
 }
 
-function Timer({
+const Timer = ({
   expiryTimestamp,
   sessionMinute,
   setSessionMinute,
-}: TimerProps) {
+}: TimerProps) => {
   const { seconds, minutes, isRunning, pause, resume, restart } = useTimer({
     expiryTimestamp,
     onExpire: () => {
@@ -67,16 +67,19 @@ function Timer({
   return (
     <div className="w-[600px] h-screen flex flex-col justify-center items-center gap-9">
       <div
-        className={`flex items-center gap-2 text-8xl font-degital rounded ${minutes === 0 && seconds <= 10 ? 'text-red-800' : 'text-green-900'}`}
+        className={`relative flex items-center gap-2 text-8xl font-degital rounded ${minutes === 0 && seconds <= 10 ? 'text-red-800' : 'text-gray-800'}`}
       >
-        <div className="w-28 flex flex-col gap-1 items-center justify-center">
+        <p className="absolute -left-12 text-5xl text-gray-800">
+          {isRunning ? <FaPersonRunning /> : <FaPerson />}
+        </p>
+        <div className="w-28 h-[176px] flex flex-col gap-1 items-center justify-center">
           <FaAngleUp
-            className={`text-4xl text-gray-600 ${isRunning ? 'invisible' : 'visible'}`}
+            className={`text-4xl text-green-800 ${isRunning ? 'invisible' : 'visible'}`}
             onClick={handleIncreaseSessionMinute}
           />
           {formatTimeUnit(minutes)}
           <FaAngleDown
-            className={`text-4xl text-gray-600 ${isRunning ? 'invisible' : 'visible'}`}
+            className={`text-4xl text-green-800 ${isRunning ? 'invisible' : 'visible'}`}
             onClick={handleDecreaseSessionMinute}
           />
         </div>
@@ -85,9 +88,7 @@ function Timer({
           {formatTimeUnit(seconds)}
         </div>
       </div>
-      <p className="text-4xl">
-        {isRunning ? <FaPersonRunning /> : <FaPerson />}
-      </p>
+
       <div className="flex gap-3 text-4xl">
         {isRunning ? (
           <Button onClick={pause}>{<VscDebugPause />}</Button>

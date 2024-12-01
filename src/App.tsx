@@ -1,29 +1,15 @@
-import { useState, useEffect } from 'react'
-import Timer from './components/timer/Timer'
+import { useEffect } from 'react'
 import { requestNotificationPermission } from './utils/requestUtils'
-import { generateTimestamp } from './utils/generateUtils'
+import Router from './routes/'
 
 function App() {
-  const [sessionMinute, setSessionMinute] = useState(25)
-  const [timestamp, setTimestamp] = useState(
-    generateTimestamp(sessionMinute * 60),
-  )
-
   useEffect(() => {
     requestNotificationPermission()
   }, [])
 
-  useEffect(() => {
-    setTimestamp(generateTimestamp(sessionMinute * 60))
-  }, [sessionMinute])
-
   return (
     <>
-      <Timer
-        expiryTimestamp={timestamp}
-        sessionMinute={sessionMinute}
-        setSessionMinute={setSessionMinute}
-      />
+      <Router />
     </>
   )
 }
