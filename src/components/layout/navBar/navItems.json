@@ -1,0 +1,20 @@
+[
+  {
+    "id": "home",
+    "label": "타이머",
+    "path": "/",
+    "isVisible": true
+  },
+  {
+    "id": "live-clock",
+    "label": "시계",
+    "path": "/live-clock",
+    "isVisible": true
+  },
+  {
+    "id": "stop-watch",
+    "label": "스탑워치",
+    "path": "/stop-watch",
+    "isVisible": false
+  }
+]

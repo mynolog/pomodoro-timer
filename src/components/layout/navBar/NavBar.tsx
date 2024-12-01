@@ -1,32 +1,24 @@
 import { NavLink } from 'react-router-dom'
-import { IoMdTimer, IoMdClock } from 'react-icons/io'
+import navItems from './navItems.json'
 
 const NavBar = () => {
   return (
-    <nav className="w-full flex justify-center items-center h-12 bg-black font-degital">
-      <ul className="w-4/5 flex items-center gap-5">
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              `flex justify-center items-center gap-2 ${isActive ? 'text-white' : 'text-gray-400'}`
-            }
-            to={'/'}
-          >
-            <IoMdTimer className="text-2xl" />
-            <span>타이머</span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              `flex justify-center items-center gap-2 ${isActive ? 'text-white' : 'text-gray-400'}`
-            }
-            to={'/live-clock'}
-          >
-            <IoMdClock className="text-2xl" />
-            <span>시계</span>
-          </NavLink>
-        </li>
+    <nav className="w-full flex justify-center items-center h-12 bg-black font-degital text-xl">
+      <ul className="w-4/5 flex items-center gap-8">
+        {navItems
+          .filter((item) => item.isVisible)
+          .map((item) => (
+            <li key={item.id}>
+              <NavLink
+                className={({ isActive }) =>
+                  `flex justify-center items-center gap-2 ${isActive ? 'text-white' : 'text-gray-400'}`
+                }
+                to={`${item.path}`}
+              >
+                <span>{item.label}</span>
+              </NavLink>
+            </li>
+          ))}
       </ul>
     </nav>
   )
