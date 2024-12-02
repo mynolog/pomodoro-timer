@@ -2,7 +2,12 @@ import type { Dispatch, SetStateAction } from 'react'
 import { useEffect } from 'react'
 import { useTimer } from 'react-timer-hook'
 import { FaPersonRunning, FaPerson } from 'react-icons/fa6'
-import { VscDebugStart, VscDebugPause, VscDebugRestart } from 'react-icons/vsc'
+import {
+  VscDebugStart,
+  VscDebugPause,
+  VscDebugRestart,
+  VscDebugRerun,
+} from 'react-icons/vsc'
 import { FaAngleUp, FaAngleDown } from 'react-icons/fa'
 import { formatTimeUnit } from '../../utils/formatUtils'
 import { generateTimestamp } from '../../utils/generateUtils'
@@ -13,12 +18,16 @@ type TimerProps = {
   expiryTimestamp: Date
   sessionMinute: number
   setSessionMinute: Dispatch<SetStateAction<number>>
+  sessionSecond: number
+  setSessionSecond: Dispatch<SetStateAction<number>>
 }
 
 const Timer = ({
   expiryTimestamp,
   sessionMinute,
   setSessionMinute,
+  sessionSecond,
+  setSessionSecond,
 }: TimerProps) => {
   const { seconds, minutes, isRunning, pause, resume, restart } = useTimer({
     expiryTimestamp,
@@ -29,12 +38,17 @@ const Timer = ({
   })
 
   useEffect(() => {
-    const newTimestamp = generateTimestamp(sessionMinute * 60)
+    const newTimestamp = generateTimestamp(sessionMinute * 60 + sessionSecond)
     restart(newTimestamp, false)
-  }, [sessionMinute, restart])
+  }, [sessionMinute, sessionSecond, restart])
+
+  const restartTimestamp = () => {
+    const newTimestamp = generateTimestamp(sessionMinute * 60 + sessionSecond)
+    restart(newTimestamp, true)
+  }
 
   const initTimestamp = () => {
-    const newTimestamp = generateTimestamp(sessionMinute * 60)
+    const newTimestamp = generateTimestamp(25 * 60)
     restart(newTimestamp, false)
   }
 
@@ -64,6 +78,24 @@ const Timer = ({
     })
   }
 
+  const handleIncreaseSessionSecond = () => {
+    setSessionSecond((prevState) => {
+      if (prevState >= 59) {
+        return 0
+      }
+      return prevState + 1
+    })
+  }
+
+  const handleDecreaseSessionSecond = () => {
+    setSessionSecond((prevState) => {
+      if (prevState <= 0) {
+        return 59
+      }
+      return prevState - 1
+    })
+  }
+
   return (
     <div className="w-[600px] h-screen flex flex-col justify-center items-center gap-9">
       <div
@@ -84,8 +116,16 @@ const Timer = ({
           />
         </div>
         <div className={`${isRunning ? 'animate-blink' : ''}`}>:</div>
-        <div className="w-28 flex gap-1 items-center justify-center">
+        <div className="w-28 h-[176px] flex flex-col gap-1 items-center justify-center">
+          <FaAngleUp
+            className={`text-4xl text-green-800 ${isRunning ? 'invisible' : 'visible'}`}
+            onClick={handleIncreaseSessionSecond}
+          />
           {formatTimeUnit(seconds)}
+          <FaAngleDown
+            className={`text-4xl text-green-800 ${isRunning ? 'invisible' : 'visible'}`}
+            onClick={handleDecreaseSessionSecond}
+          />
         </div>
       </div>
 
@@ -97,6 +137,7 @@ const Timer = ({
             {<VscDebugStart />}
           </Button>
         )}
+        <Button onClick={restartTimestamp}>{<VscDebugRerun />}</Button>
         <Button onClick={initTimestamp}>{<VscDebugRestart />}</Button>
       </div>
     </div>
