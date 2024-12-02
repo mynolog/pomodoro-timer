@@ -40,9 +40,9 @@ const Clock = ({ clockMode, setClockMode }: ClockProps) => {
       <div className="flex gap-3 text-4xl">
         <Button onClick={handleToggleClockMode}>
           {clockMode === '24' ? (
-            <TbClock12 data-testid="clock-icon-12" />
-          ) : (
             <TbClock24 data-testid="clock-icon-24" />
+          ) : (
+            <TbClock12 data-testid="clock-icon-12" />
           )}
         </Button>
       </div>

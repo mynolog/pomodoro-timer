@@ -31,18 +31,18 @@ describe('Clock Component', () => {
   test('시계 모드를 전환 토글 버튼의 아이콘이 정상적으로 표시되어야 한다. ', () => {
     render(<TestWrapper />)
 
-    // 초기 12시간 모드일 때 24시간 모드 버튼 아이콘이 맞는지 확인
+    // 초기 12시간 모드일 때 12시간 모드 버튼 아이콘이 맞는지 확인
     const button = screen.getByRole('button')
-    // <TbClock24 data-testid="clock-icon-24" />
-    const clockIcon24 = within(button).getByTestId('clock-icon-24')
-    expect(clockIcon24).toBeInTheDocument()
+    // <TbClock12 data-testid="clock-icon-12" />
+    const clockIcon12 = within(button).getByTestId('clock-icon-12')
+    expect(clockIcon12).toBeInTheDocument()
 
     // 24시간 모드로 전환하는 버튼 클릭
     fireEvent.click(button)
 
-    // 24시간 모드로 변경되었을 때 12시간 모드 버튼 아이콘 바뀌었는지 확인
-    // <TbClock12 data-testid="clock-icon-12" />
-    const clockIcon12 = within(button).getByTestId('clock-icon-12')
-    expect(clockIcon12).toBeInTheDocument()
+    // 24시간 모드로 변경되었을 때 24시간 모드 버튼 아이콘 바뀌었는지 확인
+    // <TbClock24 data-testid="clock-icon-24" />
+    const clockIcon24 = within(button).getByTestId('clock-icon-24')
+    expect(clockIcon24).toBeInTheDocument()
   })
 })
