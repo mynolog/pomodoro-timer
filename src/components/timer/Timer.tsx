@@ -16,18 +16,18 @@ import Button from '../common/Button/Button'
 
 type TimerProps = {
   expiryTimestamp: Date
-  sessionMinute: number
-  setSessionMinute: Dispatch<SetStateAction<number>>
-  sessionSecond: number
-  setSessionSecond: Dispatch<SetStateAction<number>>
+  pomodoroMinutes: number
+  setPomodoroMinutes: Dispatch<SetStateAction<number>>
+  pomodoroSeconds: number
+  setPomodoroSeconds: Dispatch<SetStateAction<number>>
 }
 
 const Timer = ({
   expiryTimestamp,
-  sessionMinute,
-  setSessionMinute,
-  sessionSecond,
-  setSessionSecond,
+  pomodoroMinutes,
+  setPomodoroMinutes,
+  pomodoroSeconds,
+  setPomodoroSeconds,
 }: TimerProps) => {
   const { seconds, minutes, isRunning, pause, resume, restart } = useTimer({
     expiryTimestamp,
@@ -38,18 +38,22 @@ const Timer = ({
   })
 
   useEffect(() => {
-    const newTimestamp = generateTimestamp(sessionMinute * 60 + sessionSecond)
+    const newTimestamp = generateTimestamp(
+      pomodoroMinutes * 60 + pomodoroSeconds,
+    )
     restart(newTimestamp, false)
-  }, [sessionMinute, sessionSecond, restart])
+  }, [pomodoroMinutes, pomodoroSeconds, restart])
 
   const restartTimestamp = () => {
-    const newTimestamp = generateTimestamp(sessionMinute * 60 + sessionSecond)
+    const newTimestamp = generateTimestamp(
+      pomodoroMinutes * 60 + pomodoroSeconds,
+    )
     restart(newTimestamp, true)
   }
 
   const initTimestamp = () => {
-    setSessionMinute(25)
-    setSessionSecond(0)
+    setPomodoroMinutes(25)
+    setPomodoroSeconds(0)
     const newTimestamp = generateTimestamp(25 * 60)
     restart(newTimestamp, false)
   }
@@ -63,7 +67,7 @@ const Timer = ({
   }
 
   const handleIncreaseSessionMinute = () => {
-    setSessionMinute((prevState) => {
+    setPomodoroMinutes((prevState) => {
       if (prevState >= 59) {
         return 0
       }
@@ -72,7 +76,7 @@ const Timer = ({
   }
 
   const handleDecreaseSessionMinute = () => {
-    setSessionMinute((prevState) => {
+    setPomodoroMinutes((prevState) => {
       if (prevState <= 0) {
         return 59
       }
@@ -81,7 +85,7 @@ const Timer = ({
   }
 
   const handleIncreaseSessionSecond = () => {
-    setSessionSecond((prevState) => {
+    setPomodoroSeconds((prevState) => {
       if (prevState >= 59) {
         return 0
       }
@@ -90,7 +94,7 @@ const Timer = ({
   }
 
   const handleDecreaseSessionSecond = () => {
-    setSessionSecond((prevState) => {
+    setPomodoroSeconds((prevState) => {
       if (prevState <= 0) {
         return 59
       }
