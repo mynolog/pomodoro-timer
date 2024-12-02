@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { useTime } from 'react-timer-hook'
 import { TbClock12, TbClock24 } from 'react-icons/tb'
 import { formatTimeUnit } from '../../utils/formatUtils'
@@ -27,7 +27,7 @@ const Clock = ({ clockMode, setClockMode }: ClockProps) => {
         <div
           className={`absolute -left-32 w-28 flex justify-center items-center text-teal-800 ${clockMode === '24' ? 'invisible' : 'visible'} `}
         >
-          {ampm || ''}
+          {clockMode === '12' && ampm ? ampm : null}
         </div>
         <div className="w-28 h-[176px] flex flex-col gap-1 items-center justify-center">
           {clockMode === '24' ? formatTimeUnit(hours) : hours}
@@ -39,7 +39,11 @@ const Clock = ({ clockMode, setClockMode }: ClockProps) => {
       </div>
       <div className="flex gap-3 text-4xl">
         <Button onClick={handleToggleClockMode}>
-          {clockMode === '24' ? <TbClock12 /> : <TbClock24 />}
+          {clockMode === '24' ? (
+            <TbClock12 data-testid="clock-icon-12" />
+          ) : (
+            <TbClock24 data-testid="clock-icon-24" />
+          )}
         </Button>
       </div>
     </div>
