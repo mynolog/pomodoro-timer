@@ -3,24 +3,24 @@ import Timer from '../../components/timer/Timer'
 import { generateTimestamp } from '../../utils/generateUtils'
 
 const Home = () => {
-  const [sessionMinute, setSessionMinute] = useState(25)
-  const [sessionSecond, setSessionSecond] = useState(0)
+  const [pomodoroMinutes, setPomodoroMinutes] = useState(25)
+  const [pomodoroSeconds, setPomodoroSeconds] = useState(0)
   const [timestamp, setTimestamp] = useState(
-    generateTimestamp(sessionMinute * 60 + sessionSecond),
+    generateTimestamp(pomodoroMinutes * 60 + pomodoroSeconds),
   )
 
   useEffect(() => {
-    setTimestamp(generateTimestamp(sessionMinute * 60 + sessionSecond))
-  }, [sessionMinute, sessionSecond])
+    setTimestamp(generateTimestamp(pomodoroMinutes * 60 + pomodoroSeconds))
+  }, [pomodoroMinutes, pomodoroSeconds])
 
   return (
     <div className="w-[600px]">
       <Timer
         expiryTimestamp={timestamp}
-        sessionMinute={sessionMinute}
-        setSessionMinute={setSessionMinute}
-        sessionSecond={sessionSecond}
-        setSessionSecond={setSessionSecond}
+        pomodoroMinutes={pomodoroMinutes}
+        setPomodoroMinutes={setPomodoroMinutes}
+        pomodoroSeconds={pomodoroSeconds}
+        setPomodoroSeconds={setPomodoroSeconds}
       />
     </div>
   )
