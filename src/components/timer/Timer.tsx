@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react'
 import { useEffect, useState } from 'react'
 import { useTimer } from 'react-timer-hook'
-import { MdOutlineFreeBreakfast } from 'react-icons/md'
+import { MdOutlineFreeBreakfast, MdTimer10Select } from 'react-icons/md'
 import { FaPersonRunning, FaPerson } from 'react-icons/fa6'
 import {
   VscDebugStart,
@@ -41,7 +41,7 @@ const Timer = ({
       } else {
         sendNotification('세션 종료', getRandomMessage('break'))
         setIsPomodoro(true)
-        restartPomodoroTimestamp()
+        restartPomodoroTimestamp(true)
       }
     },
     autoStart: false,
@@ -54,12 +54,12 @@ const Timer = ({
     restart(newTimestamp, false)
   }, [pomodoroMinutes, pomodoroSeconds, restart])
 
-  const restartPomodoroTimestamp = () => {
+  const restartPomodoroTimestamp = (autoStart: boolean) => {
     setIsPomodoro(true)
     const newTimestamp = generateTimestamp(
       pomodoroMinutes * 60 + pomodoroSeconds,
     )
-    restart(newTimestamp)
+    restart(newTimestamp, autoStart)
   }
 
   const initPomodoroTimestamp = () => {
@@ -119,22 +119,53 @@ const Timer = ({
     })
   }
 
+  const handleToggleTimerMode = (type: 'pomodoro' | 'break') => {
+    setIsPomodoro((prevState) => !prevState)
+    switch (type) {
+      case 'pomodoro':
+        restartPomodoroTimestamp(false)
+        break
+      case 'break':
+        initBreakTimestamp()
+        break
+      default:
+        break
+    }
+  }
+
   return (
     <div className="w-[600px] h-screen flex flex-col justify-center items-center gap-9">
       <div
         className={`relative flex items-center gap-2 text-8xl font-degital rounded ${minutes === 0 && seconds <= 10 ? 'text-red-800' : 'text-gray-800'}`}
       >
-        <p className="absolute -left-20 text-6xl text-teal-800">
-          {isPomodoro ? (
-            isRunning ? (
-              <FaPersonRunning />
+        <div className="absolute -left-20 flex flex-col gap-2 text-4xl text-teal-800">
+          <Button bgColor="bg-gray-900">
+            {isPomodoro ? (
+              isRunning ? (
+                <FaPersonRunning />
+              ) : (
+                <FaPerson />
+              )
             ) : (
-              <FaPerson />
-            )
+              <MdOutlineFreeBreakfast />
+            )}
+          </Button>
+          {isPomodoro ? (
+            <Button
+              bgColor="bg-red-800"
+              onClick={() => handleToggleTimerMode('break')}
+            >
+              <MdOutlineFreeBreakfast />
+            </Button>
           ) : (
-            <MdOutlineFreeBreakfast className="text-red-800" />
+            <Button
+              bgColor="bg-green-700"
+              onClick={() => handleToggleTimerMode('pomodoro')}
+            >
+              <MdTimer10Select />
+            </Button>
           )}
-        </p>
+        </div>
         <div className="w-28 h-[176px] flex flex-col gap-1 items-center justify-center">
           <FaAngleUp
             className={`text-4xl text-green-800 ${isRunning || !isPomodoro ? 'invisible' : 'visible'}`}
@@ -170,7 +201,10 @@ const Timer = ({
             {<VscDebugStart />}
           </Button>
         )}
-        <Button bgColor="bg-gray-900" onClick={restartPomodoroTimestamp}>
+        <Button
+          bgColor="bg-gray-900"
+          onClick={() => restartPomodoroTimestamp(true)}
+        >
           {<VscDebugRerun />}
         </Button>
         <Button bgColor="bg-gray-900" onClick={initPomodoroTimestamp}>
