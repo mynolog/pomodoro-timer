@@ -1,14 +1,14 @@
 import type { ReactNode } from 'react'
 
 type ButtonProps = {
-  onClick: () => void
+  onClick?: () => void
   children: ReactNode
   disabled?: boolean
   bgColor?: 'bg-green-700' | 'bg-red-800' | 'bg-gray-900'
 }
 
 const Button = ({
-  onClick,
+  onClick = () => {},
   children,
   disabled = false,
   bgColor = 'bg-green-700',
