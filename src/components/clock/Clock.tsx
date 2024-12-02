@@ -30,7 +30,7 @@ const Clock = ({ clockMode, setClockMode }: ClockProps) => {
           {ampm || ''}
         </div>
         <div className="w-28 h-[176px] flex flex-col gap-1 items-center justify-center">
-          {formatTimeUnit(hours)}
+          {clockMode === '24' ? formatTimeUnit(hours) : hours}
         </div>
         <div className="animate-blink">:</div>
         <div className="w-28 flex gap-1 items-center justify-center">

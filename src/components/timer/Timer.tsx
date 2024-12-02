@@ -48,6 +48,8 @@ const Timer = ({
   }
 
   const initTimestamp = () => {
+    setSessionMinute(25)
+    setSessionSecond(0)
     const newTimestamp = generateTimestamp(25 * 60)
     restart(newTimestamp, false)
   }
