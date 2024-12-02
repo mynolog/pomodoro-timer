@@ -5,6 +5,7 @@ import { generateTimestamp } from '../../utils/generateUtils'
 const Home = () => {
   const [pomodoroMinutes, setPomodoroMinutes] = useState(25)
   const [pomodoroSeconds, setPomodoroSeconds] = useState(0)
+
   const [timestamp, setTimestamp] = useState(
     generateTimestamp(pomodoroMinutes * 60 + pomodoroSeconds),
   )
