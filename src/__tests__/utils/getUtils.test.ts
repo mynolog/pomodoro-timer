@@ -1,5 +1,5 @@
-import { getRandomMessage } from './getUtils'
-import { POMODORO_MESSAGES, BREAK_MESSAGES } from '../constants/messages'
+import { getRandomMessage } from '../../utils/getUtils'
+import { POMODORO_MESSAGES, BREAK_MESSAGES } from '../../constants/messages'
 
 describe('랜덤 메시지 출력 함수', () => {
   let randomMock: jest.SpyInstance

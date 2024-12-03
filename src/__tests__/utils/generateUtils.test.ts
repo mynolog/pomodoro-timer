@@ -1,4 +1,4 @@
-import { generateTimestamp } from './generateUtils'
+import { generateTimestamp } from '../../utils/generateUtils'
 
 describe('타임스탬프 생성 유틸 함수', () => {
   beforeAll(() => {

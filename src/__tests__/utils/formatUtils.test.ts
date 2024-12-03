@@ -1,4 +1,4 @@
-import { formatTimeUnit } from './formatUtils'
+import { formatTimeUnit } from '../../utils/formatUtils'
 
 describe('시간 포맷 함수', () => {
   test('한자리 숫자 앞에 0을 붙여서 두자리 숫자로 맞춘다.', () => {

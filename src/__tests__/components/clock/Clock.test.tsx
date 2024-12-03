@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { render, screen, fireEvent, within } from '@testing-library/react'
-import Clock from './Clock'
+import Clock from '../../../components/clock/Clock'
 
 const TestWrapper = () => {
   const [clockMode, setClockMode] = useState<'12' | '24'>('12')
