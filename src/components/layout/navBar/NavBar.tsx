@@ -4,7 +4,7 @@ import navItems from './navItems.json'
 const NavBar = () => {
   return (
     <nav className="w-full flex justify-center items-center h-12 bg-black font-degital text-xl">
-      <ul className="w-4/5 flex items-center gap-8">
+      <ul className="w-2/5 flex items-center gap-8">
         {navItems
           .filter((item) => item.isVisible)
           .map((item) => (

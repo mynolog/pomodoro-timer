@@ -3,7 +3,7 @@ import NavBar from './navBar/NavBar'
 
 const Layout = () => {
   return (
-    <div className="flex flex-col">
+    <div className="w-full flex flex-col items-center">
       <NavBar />
       <Outlet />
     </div>
