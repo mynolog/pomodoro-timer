@@ -3,6 +3,7 @@ import Layout from '../components/layout/Layout'
 import Home from '../pages/home/Home'
 import LiveClock from '../pages/liveClock/LiveTime'
 import Stopwatch from '../pages/stopwatch/Stopwatch'
+import NotFound from '../pages/error/NotFound'
 
 const routes = [
   {
@@ -22,6 +23,10 @@ const routes = [
         element: <Stopwatch />,
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ]
 
